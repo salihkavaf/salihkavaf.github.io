@@ -1,0 +1,103 @@
+.ps-slider {
+    --btn-bg-color: rgb(255 255 255 / 50%);
+    --btn-hover-color: white;
+    --btn-angle-color: black;
+    --transition-duration: .3s;
+    position: relative;
+}
+
+.ps-slider .prev,
+.ps-slider .next {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: var(--btn-bg-color);
+    border-radius: 50%;
+    z-index: 1;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+    transition: background-color .2s ease-in-out;
+}
+
+.ltr .ps-slider .prev,
+.rtl .ps-slider .next {
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.rtl .ps-slider .prev,
+.ltr .ps-slider .next {
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.ps-slider .prev.hide {
+    display: none;
+}
+
+.ps-slider .prev:hover,
+.ps-slider .next:hover {
+    background-color: var(--btn-hover-color);
+}
+
+.ps-slider .prev::after,
+.ps-slider .next::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border: 3px solid transparent;
+    border-bottom-color: var(--btn-angle-color);
+}
+
+.ltr .ps-slider .prev::after,
+.rtl .ps-slider .next::after {
+    left: 55%;
+    border-left-color: var(--btn-angle-color);
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rtl .ps-slider .prev::after,
+.ltr .ps-slider .next::after {
+    right: 57%;
+    border-right-color: var(--btn-angle-color);
+    transform: translate(50%, -50%) rotate(-45deg);
+}
+
+.ps-slider .ps-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.ps-slider .ps-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    transition: all var(--transition-duration) ease-in-out;
+}
+
+.ltr .ps-container {
+    left: 0;
+    right: unset !important;
+}
+
+.rtl .ps-container {
+    right: 0;
+    left: unset !important;
+    flex-direction: row-reverse;
+}
+
+.ps-slider .slide {
+    height: 100%;
+    transition: transform .2s ease-in-out;
+}
+
+.ps-container:hover .slide:not(:hover) {
+    transform: scale(.9);
+}
